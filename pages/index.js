@@ -1,14 +1,25 @@
-import Item from './Item'
-import Link from 'next/link'
+import Shop from "./Shop";
+import Link from "next/link";
 
-export default function Home() {
+export async function getServerSideProps() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+  const data = await res.json();
+  return {
+    props: { data },
+  };
+}
+
+export default function Home({ data }) {
+  console.log(data);
   return (
     <div className="container">
-      <h1 className="font-sans text-center prose prose-xl sm:text-3xl md:text-4xl lg:text-5xl my-3">
-        Next Store
-      </h1>
-      <button className='absolute top-4 right-6'>
-        <Link href='/Cart'>
+      <div className="flex justify-center items-center w-screen">
+        <h1 className="font-sans prose prose-xl sm:text-3xl md:text-4xl lg:text-5xl my-3">
+          Next Store
+        </h1>
+      </div>
+      <button className="absolute top-4 right-6">
+        <Link href="/Cart">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
@@ -25,7 +36,7 @@ export default function Home() {
           </svg>
         </Link>
       </button>
-      <Item/>
+      <Shop />
     </div>
-  )
+  );
 }
