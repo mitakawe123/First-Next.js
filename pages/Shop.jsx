@@ -1,5 +1,6 @@
 import React from "react";
 import Cart from "./Cart";
+import { NextPage } from "next";
 import Product from "./Product";
 
 export default function Shop() {

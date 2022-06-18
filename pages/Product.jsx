@@ -1,29 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { Context } from "../Context/Context";
 
-export async function getServerSideProps() {
-  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
-  const data = await res.json();
-  return {
-    props: { data },
-  };
-}
-
-function Product({ data }) {
-  console.log(data);
+export default function Product() {
   // const [itemShop, setItemsShop] = useState([]);
-
-  // useEffect(() => {
-  //   axios
-  //     .get("https://fakestoreapi.com/products")
-  //     .then((res) => {
-  //       setItemsShop(res.data);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, []);
-
+  const { data } = useContext(Context);
   return (
     <>
-      {/* {itemShop.slice(0, 3).map((item, index) => {
+      {data.slice(0, 3).map((item, index) => {
         const { title, description, image, price } = item;
         return (
           <div
@@ -43,9 +26,7 @@ function Product({ data }) {
             </div>
           </div>
         );
-      })} */}
+      })}
     </>
   );
 }
-
-export default Product;
